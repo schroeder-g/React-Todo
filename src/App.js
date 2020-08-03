@@ -1,8 +1,22 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid'
+import Styled from 'styled-components'
 
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
+
+const StyledApp = Styled.div`
+  width: 100%;
+  height: 100%;
+  color: #ecf0f1;
+  background-color: #34495e;
+
+  h2 {
+    padding-top: 2%;
+    margin-left: 4%;
+
+  }
+`
 
 const todos = [
   { name : "Get the bag",
@@ -43,22 +57,32 @@ class App extends React.Component {
       complete: false
     }
     this.setState({
-      todos : [ ...todos, newTodo ]
+      todos : [ ...this.state.todos, newTodo ]
+    })
+  }
+
+  removeTodo = id => {
+    this.state.todos.forEach( todo => {
+      if (todo.id === id ){
+        const i = this.state.todos.indexOf(todo)
+        this.state.todos.splice(i)
+      }
     })
   }
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <StyledApp className="app">
+        <h2>Let's get it done.</h2>
         <TodoList 
+          todos={this.state.todos}
           toggleDone={this.toggleDone} 
-          todos={this.state.todos} 
-        />
+          removeTodo={this.removeTodo} 
+          />
         <TodoForm 
           addTodo= {this.addTodo} 
         />
-      </div>
+      </StyledApp>
     );
   }
 }

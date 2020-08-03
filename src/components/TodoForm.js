@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import Styled from 'styled-components'
+
+const StyledForm = Styled.form`
+    padding: 4%; 
+`
 
 export default class TodoForm extends Component {
     constructor(props) {
@@ -21,14 +26,15 @@ export default class TodoForm extends Component {
 
     render() {
         return (
-            <form className="todo-form" onSubmit={this.handleSubmit}>
+            <StyledForm className="todo-form" onSubmit={this.handleSubmit}>
                 <label htmlFor="add-todo">Add a Todo: </label>
                 <input
                     name="add-todo"
                     type="text"
+                    placeholder="bake cookies with grandma"
                     onChange={this.handleChanges} />
                 <button>Add</button>
-            </form>
+            </StyledForm>
         )
     }
 }
